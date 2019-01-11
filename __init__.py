@@ -1,8 +1,12 @@
 
+import pickle
 from flask import Flask, render_template
 from flask import request, redirect, g
 import os
 # import sqlite3
+
+# getting our trained model from a file we created earlier
+model = pickle.load(open("model.pkl","r"))
 
 port = int(os.environ.get("PORT", 5000))
 
