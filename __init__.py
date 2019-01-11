@@ -29,6 +29,21 @@ def index():
 def predict():
 	return render_template('predict.html')
 
+@app.route('/result', methods=['GET'])
+def result():
+    #grabbing a set of features from the request's body
+    foo = request.args.getlist('foo')
+    
+    # our model rates the wine based on the input array
+    prediction = model.predict([foo])
+    
+    #sending our response object back as json
+    return render_template('result.html', prediction=prediction)
+
+@app.route('/insert')
+def insert():
+		return render_template('insert.html')    
+
 # @app.route('/signup', methods = ['POST'])
 # def signup():
 # 	email = request.form['email']
