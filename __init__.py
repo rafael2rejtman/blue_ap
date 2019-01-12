@@ -25,9 +25,11 @@ port = int(os.environ.get("PORT", 5000))
 def result():
     #grabbing a set of features from the request's body
     foo = request.args.getlist('foo')
+
+    print(foo)
     
     # our model rates the wine based on the input array
-    prediction = model.predict([foo])
+    prediction = model.predict([list(map(float,foo))])
     
     #sending our response object back as json
     return render_template('result.html', prediction=prediction)
