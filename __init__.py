@@ -5,12 +5,12 @@ from flask import request, redirect, g
 import os
 # import sqlite3
 
+app = Flask(__name__)
+
 # getting our trained model from a file we created earlier
-model = pickle.load(open("model.pkl","r"))
+model = pickle.load(open("model.pkl"))
 
 port = int(os.environ.get("PORT", 5000))
-
-app = Flask(__name__)
 
 # @app.before_request
 # def before_request():
@@ -20,14 +20,6 @@ app = Flask(__name__)
 # def teardown_request(exception):
 # 	if hasattr(g, 'db'):
 # 		g.db.close()	
-
-@app.route('/')
-def index():
-	return render_template('index.html')
-
-@app.route('/predict')
-def predict():
-	return render_template('predict.html')
 
 @app.route('/result', methods=['GET'])
 def result():
@@ -39,6 +31,10 @@ def result():
     
     #sending our response object back as json
     return render_template('result.html', prediction=prediction)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 @app.route('/insert')
 def insert():
