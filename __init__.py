@@ -7,8 +7,8 @@ import os
 
 app = Flask(__name__)
 
-# getting our trained model from a file we created earlier
-model = pickle.load(open("model.pkl"))
+with open("model.pkl", 'rb') as file:
+    model = pickle.load(file)
 
 port = int(os.environ.get("PORT", 5000))
 
